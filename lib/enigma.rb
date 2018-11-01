@@ -1,9 +1,8 @@
 
 class Enigma
-  attr_reader :message
 
   def encrypt(message, key = nil, date = nil)
-    @message = message
+    @i = InputBundle.new(message, key, date)
   end
 
   def random_key
