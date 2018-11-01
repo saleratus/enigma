@@ -5,8 +5,4 @@ class Enigma
     @i = InputBundle.new(message, key, date)
   end
 
-  def random_key
-    rand(100_000)
-  end
-
 end
