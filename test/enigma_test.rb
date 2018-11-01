@@ -1,4 +1,5 @@
 require_relative './test_helper'
+require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
 
@@ -21,7 +22,7 @@ class EnigmaTest < Minitest::Test
 
   def test_it_saves_message
     expected = @my_message
-    assert_equal expected, @e.my_message
+    assert_equal expected, @e.message
   end
 
   def test_it_assigns_default_key
