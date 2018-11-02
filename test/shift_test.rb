@@ -18,6 +18,9 @@ class ShiftTest < Minitest::Test
 
   def test_it_calculates_position_key
     assert_equal 02, @s.position_key(@key, 0)
+    assert_equal 27, @s.position_key(@key, 1)
+    assert_equal 71, @s.position_key(@key, 2)
+    assert_equal 15, @s.position_key(@key, 3)
   end
 
   def test_it_calculates_position_offset

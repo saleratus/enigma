@@ -11,7 +11,7 @@ class Shift
   end
 
   def position_key(key, position)
-    02
+    key[position..(position + 1)].to_i
   end
 
   def position_offset(date, position)
