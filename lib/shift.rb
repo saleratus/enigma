@@ -5,4 +5,17 @@ class Shift
     @shift_value = 73
   end
 
+  def calculate_shift(key, date, position)
+
+
+  end
+
+  def position_key(key, position)
+    02
+  end
+
+  def position_offset(date, position)
+    1
+  end
+
 end
