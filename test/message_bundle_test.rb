@@ -46,7 +46,7 @@ class MessageBundleTest < Minitest::Test
   end
 
   def test_it_creates_todays_date_string
-    today = todays_date_string
+    today = @i.todays_date_string
     assert_instance_of String, today
     assert_equal 6, today.length
     assert_instance_of Integer, today.to_i
@@ -56,7 +56,6 @@ class MessageBundleTest < Minitest::Test
     @i = MessageBundle.new(@my_message, 44444)
     assert_instance_of String, @i.date
     assert_equal 6, @i.date.length
-    puts @i.date
   end
 
 end
