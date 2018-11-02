@@ -1,8 +1,11 @@
+
 class Shift
+
   attr_reader :shift_value
 
   def initialize(message_bundle, position)
-    @shift_value = calculate_shift(message_bundle.key, message_bundle.date, position)
+    @shift_value =
+        calculate_shift(message_bundle.key, message_bundle.date, position)
   end
 
   def calculate_shift(key, date, position)
