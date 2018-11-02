@@ -1,23 +1,23 @@
 require_relative './test_helper'
-require './lib/shift'
+require './lib/shifter'
 require './lib/message_bundle'
 
-class ShiftTest < Minitest::Test
+class ShifterTest < Minitest::Test
 
   def setup
     @key = "02715"
     @date = "040895"
     @m = MessageBundle.new("hello world end", @key, @date)
     @position = 2 #of 4 possible positions from 0 to 3
-    @s = Shift.new(@m, @position)
+    @s = Shifter.new(@m)
   end
 
   def test_it_exists
-    assert_instance_of Shift, @s
+    assert_instance_of Shifter, @s
   end
 
-  def test_it_has_shift_value
-    assert_instance_of Integer, @s.shift_value
+  def test_it_has_shifts_hash
+    assert_instance_of Hash, @s.shifts
   end
 
   def test_it_calculates_position_key
@@ -35,8 +35,13 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_calculates_shift
-    @s.calculate_shift(@key, @date, @position)
-    assert_equal 73, @s.shift_value
+    shift = @s.calculate_shift(@key, @date, @position)
+    assert_equal 73, shift
+  end
+
+  def test_it_saves_all_four_shifts
+    expected = { A: 3, B: 27, C: 73, D: 20 }
+    assert_equal expected, @s.shifts
   end
 
 end
