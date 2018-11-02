@@ -7,7 +7,7 @@ class ShiftTest < Minitest::Test
   def setup
     @key = "02715"
     @date = "04895"
-    @m = MessageBundle.new("hello goodbye end", @key, @date)
+    @m = MessageBundle.new("hello world end", @key, @date)
     position = 2 #of possible 4 positions from 0 to 3
     @s = Shift.new(@m, position)
   end
@@ -17,6 +17,7 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_calculates_shift
+    assert_equal 73, @s.shift_value
   end
 
 end
