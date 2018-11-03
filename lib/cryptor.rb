@@ -1,3 +1,4 @@
+require_relative '../lib/shifter'
 
 class Cryptor
   attr_reader :m, :shifter

@@ -23,7 +23,7 @@ class DecryptorTest < Minitest::Test
 
   def test_it_decrypts_message
     expected = "hello world"
-    Encryptor.run(@bundle)
+    Decryptor.run(@bundle)
     assert_equal expected, @bundle.result
   end
 
