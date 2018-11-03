@@ -6,7 +6,7 @@ class EnigmaTest < Minitest::Test
 
   def setup
     @e = Enigma.new
-    @message = "hello world end"
+    @message = "hello world! end"
     @key = "02715"
     @date = "040895"
     @e.encrypt(@message, @key, @date)
@@ -21,13 +21,18 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_encrypts_message_with_key_and_date
-    skip
-    @e.encrypt(@message, "12345", Date.today)
+    actual = @e.encrypt(@message, @key, @date)
+    assert_equal "keder ohulw!cefx", actual[:encryption]
+    assert_equal @key, actual[:key]
+    assert_equal @date, actual[:date]
   end
 
   def test_it_encrypts_message_without_key_and_date
-    skip
-    @e.encrypt(@message)
+    actual = @e.encrypt(@message)
+    assert !('' == actual[:encryption])
+    assert_instance_of Integer, actual[:key].to_i
+    assert_instance_of Integer, actual[:date].to_i
+    binding.pry
   end
 
 end
