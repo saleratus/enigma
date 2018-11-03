@@ -34,4 +34,11 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Integer, actual[:date].to_i
   end
 
+  def test_it_decrypts_message_with_key_and_date
+    actual = @e.decrypt("keder ohulw", "02715", "040895")
+    assert_equal "hello world", actual[:decryption]
+    assert_equal @key, actual[:key]
+    assert_equal @date, actual[:date]
+  end
+
 end
