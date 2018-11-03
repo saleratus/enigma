@@ -25,4 +25,7 @@ class Shifter
     date_squared_string[(position - 4)].to_i
   end
 
+  def char_shift(char, position)
+  end
+
 end
