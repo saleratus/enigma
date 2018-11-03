@@ -1,6 +1,6 @@
 require_relative './test_helper'
-require './lib/enigma'
-require './lib/message_bundle'
+require_relative '../lib/enigma'
+require_relative '../lib/message_bundle'
 
 class EnigmaTest < Minitest::Test
 
