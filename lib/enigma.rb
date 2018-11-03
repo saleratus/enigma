@@ -1,5 +1,7 @@
 require_relative './message_bundle'
 require_relative './encryptor'
+require_relative './decryptor'
+
 
 class Enigma
 
