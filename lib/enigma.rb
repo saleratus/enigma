@@ -1,4 +1,5 @@
 require_relative './message_bundle'
+require_relative './encryptor'
 
 class Enigma
 
@@ -6,6 +7,8 @@ class Enigma
 
   def encrypt(message, key = nil, date = nil)
     @m = MessageBundle.new(message, key, date)
+    Encryptor.run(@m)
+    @m.result
   end
 
 end

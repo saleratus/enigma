@@ -32,7 +32,7 @@ class EncryptorTest < Minitest::Test
 
   def test_it_encripts_message_with_capitalization
     message = 'hElLo wOrLd!! eNd'
-    @bundle = MessageBundle.new(@message, @key, @date)
+    @bundle = MessageBundle.new(message, @key, @date)
     Encryptor.run(@bundle)
     expected = "keder ohulw!! xgg"
     assert_equal expected, @bundle.result
