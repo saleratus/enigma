@@ -27,6 +27,10 @@ class MessageBundleTest < Minitest::Test
     assert_equal date, @m.date
   end
 
+  def test_it_has_cypher
+    assert_equal '', @m.cypher
+  end
+
   def test_it_creates_random_key
     142_387.times do
       key = @m.random_key
