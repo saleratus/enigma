@@ -9,4 +9,8 @@ class Encryptor
     @shifter = Shifter.new(@m)
   end
 
+  def self.encrypt(message_bundle)
+    self.new(message_bundle)
+  end
+
 end
