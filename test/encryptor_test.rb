@@ -17,7 +17,11 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_it_has_message_bundle
-    assert_equal @bundle, @e.message_bundle
+    assert_equal @bundle, @e.m
+  end
+
+  def test_it_initializes_and_holds_shifter
+    assert_instance_of Shifter, @e.shifter
   end
 
 end
