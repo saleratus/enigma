@@ -1,8 +1,11 @@
+require_relative './message_bundle'
 
 class Enigma
 
+  attr_reader :m
+
   def encrypt(message, key = nil, date = nil)
-    @i = InputBundle.new(message, key, date)
+    @m = MessageBundle.new(message, key, date)
   end
 
 end
