@@ -45,8 +45,25 @@ class ShifterTest < Minitest::Test
   end
 
   def test_it_shifts_a_character
-    char = 'm'
-    @s.char_shift(char, @position)
+    char = @s.char_shift('h', 0)
+    assert_equal 'k', char
+    char = @s.char_shift(' ', 1)
+    assert_equal ' ', char
+    char = @s.char_shift('a', 2)
+    assert_equal 't', char
+    char = @s.char_shift('z', 3)
+    assert_equal 's', char
+  end
+
+  def test_it_unshifts_a_character
+    char = @s.char_shift('h', 0, -1)
+    assert_equal 'e', char
+    char = @s.char_shift(' ', 1, -1)
+    assert_equal ' ', char
+    char = @s.char_shift('a', 2, -1)
+    assert_equal 'i', char
+    char = @s.char_shift('z', 3, -1)
+    assert_equal 'f', char
   end
 
 end

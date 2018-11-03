@@ -7,9 +7,10 @@ class Shifter
     @key = message_bundle.key
     @date = message_bundle.date
     @shifts = []
-    4.times do |position|
+    (0..3).each do |position|
       @shifts[position] = calculate_shift(position)
     end
+    @char_set = ("a".."z").to_a << " "
   end
 
   def calculate_shift(position)
@@ -25,7 +26,10 @@ class Shifter
     date_squared_string[(position - 4)].to_i
   end
 
-  def char_shift(char, position)
+  def char_shift(char, position, direction = +1)
+    shift_value = @shifts[position] * direction
+    start = @char_set.rotate(@char_set.find_index(char))
+    result = start.rotate(shift_value).shift
   end
 
 end
