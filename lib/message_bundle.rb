@@ -1,13 +1,13 @@
 require 'date'
 
 class MessageBundle
-  attr_reader :message, :key, :date, :cypher
+  attr_reader :message, :key, :date, :encryption
 
-  def initialize(message, key = nil, date = nil, cypher = '')
+  def initialize(message, key = nil, date = nil, encryption = '')
     @message = message
     @key = key ? key : random_key
     @date = date ? date : todays_date_string
-    @cypher = cypher 
+    @encryption = encryption
   end
 
   def random_key

@@ -35,7 +35,7 @@ class EncryptorTest < Minitest::Test
   def test_it_encrypts_message
     expected = "This is the expected cypher"
     Encryptor.encrypt(@bundle)
-    assert_equal expected, @bundle.cypher
+    assert_equal expected, @bundle.encryption
   end
 
 end

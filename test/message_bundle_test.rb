@@ -27,8 +27,8 @@ class MessageBundleTest < Minitest::Test
     assert_equal date, @m.date
   end
 
-  def test_it_has_cypher
-    assert_equal '', @m.cypher
+  def test_it_has_encryption
+    assert_equal '', @m.encryption
   end
 
   def test_it_creates_random_key
