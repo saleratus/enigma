@@ -16,12 +16,12 @@ class Shifter
   end
 
   def position_key(key, position)
-    key[position..(position + 1)].to_i
+    key[ position..(position + 1) ].to_i
   end
 
   def position_offset(date, position)
     date_squared_string = ((date.to_i)**2).to_s
-    single_digit_offset = date_squared_string[(position - 4)].to_i
+    date_squared_string[(position - 4)].to_i
   end
 
 end

@@ -28,9 +28,8 @@ class MessageBundleTest < Minitest::Test
   end
 
   def test_it_creates_random_key
-    100_000.times do
+    142_387.times do
       key = @i.random_key
-      #print "#{key} "
       assert_equal 5, key.length
       key = key.to_i
       in_range = key >= 0 && key <= 99_999

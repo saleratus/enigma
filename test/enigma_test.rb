@@ -22,13 +22,12 @@ class EnigmaTest < Minitest::Test
 
   def test_it_encrypts_message_with_key_and_date
     skip
-    output = @e.encrypt(@my_message, "12345", Date.today)
-    puts output
+    @e.encrypt(@message, "12345", Date.today)
   end
 
   def test_it_encrypts_message_without_key_and_date
     skip
-    output = @e.encrypt(@message)
+    @e.encrypt(@message)
   end
 
 end
