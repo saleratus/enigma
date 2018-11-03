@@ -8,7 +8,7 @@ class Enigma
   def encrypt(message, key = nil, date = nil)
     @m = MessageBundle.new(message, key, date)
     Encryptor.run(@m)
-    @m.result
+    {encryption: @m.result, key: @m.key, date: @m.date}
   end
 
 end

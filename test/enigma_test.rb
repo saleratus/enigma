@@ -22,12 +22,14 @@ class EnigmaTest < Minitest::Test
 
   def test_it_encrypts_message_with_key_and_date
     actual = @e.encrypt(@message, @key, @date)
-    assert_equal "keder ohulw!cefx", actual
+    assert_equal "keder ohulw!cefx", actual[:encryption]
+    assert_equal @key, actual[:key]
+    assert_equal @date, actual[:date]
   end
 
   def test_it_encrypts_message_without_key_and_date
     actual = @e.encrypt(@message)
-    assert !('' == actual)
+    assert !('' == actual[:encryption])
   end
 
 end
