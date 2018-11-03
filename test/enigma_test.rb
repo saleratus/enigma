@@ -30,6 +30,9 @@ class EnigmaTest < Minitest::Test
   def test_it_encrypts_message_without_key_and_date
     actual = @e.encrypt(@message)
     assert !('' == actual[:encryption])
+    assert_instance_of Integer, actual[:key].to_i
+    assert_instance_of Integer, actual[:date].to_i
+    binding.pry
   end
 
 end
