@@ -1,17 +1,13 @@
 require './lib/enigma'
+require './lib/file_io'
 
-### RUNNER FILE FOR ENIGMA WITH COMMAND LINE INTERFACE ###
+### RUNNER FILE FOR ENCRYPTION WITH COMMAND LINE INTERFACE ###
 
-handle = File.open(ARGV[0], "r")
-message = handle.read
-handle. close
+include FileIO
 
+message = file_read(ARGV[0])
 enigma = Enigma.new
 result = enigma.encrypt(message)
+file_write(ARGV[1], result[:encryption])
 
-writer = File.open(ARGV[1], "w")
-writer.write(result[:encryption])
-writer.close
-puts
 puts "Created '#{ARGV[1]}' with the key #{result[:key]} and date #{result[:date]}"
-puts
