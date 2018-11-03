@@ -1,7 +1,8 @@
 require 'date'
 
 class MessageBundle
-  attr_reader :message, :key, :date, :result
+  attr_accessor :result
+  attr_reader :message, :key, :date
 
   def initialize(message, key = nil, date = nil, result = '')
     @message = message

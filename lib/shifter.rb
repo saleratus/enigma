@@ -27,6 +27,7 @@ class Shifter
   end
 
   def char_shift(char, position, direction = +1)
+    return char if @char_set.include?(char) == false
     shift_value = @shifts[position] * direction
     start = @char_set.rotate(@char_set.find_index(char))
     result = start.rotate(shift_value).shift

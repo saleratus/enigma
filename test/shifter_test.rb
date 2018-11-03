@@ -66,4 +66,11 @@ class ShifterTest < Minitest::Test
     assert_equal 'f', char
   end
 
+  def test_it_doesnt_affect_non_characters
+    char = @s.char_shift('!', 0,)
+    assert_equal '!', char
+    char = @s.char_shift('.', 1, -1)
+    assert_equal '.', char
+  end
+
 end
