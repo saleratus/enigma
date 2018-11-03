@@ -32,7 +32,21 @@ class EnigmaTest < Minitest::Test
     assert !('' == actual[:encryption])
     assert_instance_of Integer, actual[:key].to_i
     assert_instance_of Integer, actual[:date].to_i
-    binding.pry
+  end
+
+  def test_it_decrypts_message_with_key_and_date
+    actual = @e.decrypt("keder ohulw", "02715", "040895")
+    assert_equal "hello world", actual[:decryption]
+    assert_equal @key, actual[:key]
+    assert_equal @date, actual[:date]
+  end
+
+  def test_it_decrypts_message_with_only_a_key
+    today_date_string = Date.new.strftime("%d%m%y")
+    actual = @e.decrypt("keder ohulw", "02715")
+    assert !('' == actual[:decryption])
+    assert_equal @key, actual[:key]
+    assert_equal today_date_string, actual[:date]
   end
 
 end

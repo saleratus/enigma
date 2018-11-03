@@ -11,4 +11,10 @@ class Enigma
     {encryption: @m.result, key: @m.key, date: @m.date}
   end
 
+  def decrypt(message, key = nil, date = nil)
+    @m = MessageBundle.new(message, key, date)
+    Decryptor.run(@m)
+    {decryption: @m.result, key: @m.key, date: @m.date}
+  end
+
 end
