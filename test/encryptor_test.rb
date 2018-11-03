@@ -24,4 +24,9 @@ class EncryptorTest < Minitest::Test
     assert_instance_of Shifter, @e.shifter
   end
 
+  def test_it_returns_encrypted_string
+    expected = "This is expected"
+    assert_equal expected, @e.encrypt(@bundle)
+  end
+
 end
