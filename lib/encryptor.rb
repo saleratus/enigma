@@ -17,7 +17,7 @@ class Encryptor
   def crypt
     direction = +1
     @m.result = ''
-    @m.message.each_char.with_index do |char, i|
+    @m.message.downcase.each_char.with_index do |char, i|
       position = (i % 4)
       @m.result << @shifter.char_shift(char, position, direction)
     end

@@ -10,7 +10,6 @@ class EncryptorTest < Minitest::Test
     @date = '040895'
     @bundle = MessageBundle.new(@message, @key, @date)
     @e = Encryptor.new(@bundle)
-
   end
 
   def test_it_exists
@@ -28,6 +27,14 @@ class EncryptorTest < Minitest::Test
   def test_it_encrypts_message
     expected = "keder ohulw!! xgg"
     Encryptor.run(@bundle)
+    assert_equal expected, @bundle.result
+  end
+
+  def test_it_encripts_message_with_capitalization
+    message = 'hElLo wOrLd!! eNd'
+    @bundle = MessageBundle.new(@message, @key, @date)
+    Encryptor.run(@bundle)
+    expected = "keder ohulw!! xgg"
     assert_equal expected, @bundle.result
   end
 
