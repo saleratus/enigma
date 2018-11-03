@@ -41,4 +41,12 @@ class EnigmaTest < Minitest::Test
     assert_equal @date, actual[:date]
   end
 
+  def test_it_decrypts_message_with_only_a_key
+    today_date_string = Date.new.strftime("%d%m%y")
+    actual = @e.decrypt("keder ohulw", "02715")
+    assert !('' == actual[:decryption])
+    assert_equal @key, actual[:key]
+    assert_equal today_date_string, actual[:date]
+  end
+
 end
