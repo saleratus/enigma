@@ -4,11 +4,11 @@ class MessageBundle
   attr_accessor :result
   attr_reader :message, :key, :date
 
-  def initialize(message, key = nil, date = nil, result = '')
+  def initialize(message, key = nil, date = nil)
     @message = message
     @key = key ? key : random_key
     @date = date ? date : todays_date_string
-    @result = result
+    @result = ''
   end
 
   def random_key
