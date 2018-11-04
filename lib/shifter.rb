@@ -1,6 +1,6 @@
 
 class Shifter
-
+  attr_accessor :key
   attr_reader :shifts
 
   def initialize(message_bundle)
