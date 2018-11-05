@@ -1,11 +1,11 @@
 require 'date'
 
 class MessageBundle
-  attr_accessor :message, :result, :key
+  attr_accessor :origin, :result, :key
   attr_reader :date
 
-  def initialize(message, key = nil, date = nil, result = '')
-    @message = message
+  def initialize(origin, key = nil, date = nil, result = '')
+    @origin = origin
     @key = key ? key : random_key
     @date = date ? date : todays_date_string
     @result = result

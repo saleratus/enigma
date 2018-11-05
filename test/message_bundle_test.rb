@@ -14,7 +14,7 @@ class MessageBundleTest < Minitest::Test
 
   def test_it_saves_message
     expected = @my_message
-    assert_equal expected, @m.message
+    assert_equal expected, @m.origin
   end
 
   def test_it_saves_given_key

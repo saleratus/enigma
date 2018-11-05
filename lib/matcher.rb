@@ -5,8 +5,7 @@ module Matcher
     data = {keys: keys, index: 0}
     loop do
       return nil if data == nil
-      keys = data[:keys]
-      i = data[:index]
+      keys = data[:keys]; i = data[:index]
       forward_match = right_char(keys[i]) == left_char(keys[i + 1])
       return keys if (forward_match && i == 2) # SUCCESS
       data = next_setup(data, forward_match)
@@ -14,16 +13,14 @@ module Matcher
   end
 
   def next_setup(data, forward_match)
-    keys = data[:keys]
-    i = data[:index]
+    keys = data[:keys]; i = data[:index]
     if forward_match
-      data = index_right(data)
-    elsif (keys[i + 1] + 27) <= 99 #if no match and next can increment
-      data = increment_next(data)
+      index_right(data)
+    elsif (keys[i + 1] + 27) <= 99 #if no match and next isnt maxed
+      increment_next(data)
     else #if no match and next is maxed
-      data = step_back(data)
+      step_back(data)
     end
-    data
   end
 
   def step_back(data)
@@ -34,6 +31,7 @@ module Matcher
     return nil if data[:keys][0] + 27 > 99
     increment_current(data)
   end
+
 
   def index_right(data)
     data[:index] += 1
