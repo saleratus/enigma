@@ -50,10 +50,9 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_cracks_message_with_date
-    skip
-    enigma = Enigma.new
-    encrypted = enigma.encrypt("hello world", "02715", "040895")
-    enigma.crack(encrypted, "040895")
+  skip
+    encrypted = @e.encrypt("hello world", "02715", "040895")
+    @e.crack(encrypted, "040895")
   end
 
 end

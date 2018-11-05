@@ -163,6 +163,7 @@ class CrackTest < Minitest::Test
 
   def test_it_places_decryted_message_in_bundle
     Crack.run(@m)
+    binding.pry
     assert_equal "hello world end", @m.result
   end
 

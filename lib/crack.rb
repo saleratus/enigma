@@ -22,12 +22,13 @@ class Crack
   def crackit
     remove_offsets
     find_minimum_location_keys
-    keys = match(@shifter.shifts)
-    position_keys_to_bundle_key(keys)
+    minimum_keys = @shifter.shifts
+    keys = match(minimum_keys)
+    keys_to_message_key(keys)
     Decryptor.run(@m)
   end
 
-  def position_keys_to_bundle_key(keys)
+  def keys_to_message_key(keys)
     s = ''
     keys.each { |n| s << left_char(n) }
     s << right_char(keys[3])
