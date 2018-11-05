@@ -1,26 +1,23 @@
 
-
 require './lib/shifter'
+require './lib/matcher'
 
 class Crack
 
   attr_reader :m, :shifter, :crack_bundle
 
+  include Matcher
+
   def initialize(message_bundle)
     @m = message_bundle
     @shifter = Shifter.new(@m)
     @crack_bundle = create_crack_bundle
-    crack
-  end
-
-  def self.run(message_bundle)
-    self.new(message_bundle)
   end
 
   def crack
     remove_offsets
     find_minimum_location_keys
-    #find matching location keys
+    matching_keys = match(@@shifter.shifts)
   end
 
   def create_crack_bundle
@@ -50,23 +47,6 @@ class Crack
       result_char = @crack_bundle.result[position]
       @shifter.shifts[position] = rotation_distance(origin_char, result_char)
     end
-  end
-
-  def find_matching_key_set
-    depth = 0
-    increments = [0, 0, 0, 0]
-
-
-
-
-  end
-
-  def left_char(n)
-    format('%02d', n)[0]
-  end
-
-  def right_char(n)
-    format('%02d', n)[1]
   end
 
 end

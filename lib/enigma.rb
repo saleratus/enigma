@@ -19,10 +19,10 @@ class Enigma
     {decryption: @m.result, key: @m.key, date: @m.date}
   end
 
-  #def crack(message, '00000', date = nil)
-  #  @m = MessageBundle.new(message, nil, date)
-  #  Crack.run(@m)
-  #  {decryption: @m.result, key: @m.key, date: @m.date}
-  #end
+  def crack(message, '00000', date = nil)
+    @m = MessageBundle.new(message, nil, date)
+    Crack.run(@m)
+    {decryption: @m.result, key: @m.key, date: @m.date}
+  end
 
 end
