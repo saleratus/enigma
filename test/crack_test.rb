@@ -1,3 +1,4 @@
+
 require_relative './test_helper'
 require_relative '../lib/crack'
 require_relative '../lib/message_bundle'
@@ -9,7 +10,7 @@ class CrackTest < Minitest::Test
     @enigma = Enigma.new
     @encrypted = @enigma.encrypt("hello world end", "02715", "040895")
     @m = MessageBundle.new(@encrypted[:encryption], '00000', "040895")
-    @c = Crack.run(@m)
+    @c = Crack.new(@m)
   end
 
   def test_it_exists
@@ -34,7 +35,7 @@ class CrackTest < Minitest::Test
 
   def test_it_removes_crack_bundle_offsets
     @c.remove_offsets
-    assert_equal "fnsj", @c.crack_bundle.message
+    assert_equal "gnuo", @c.crack_bundle.message
     assert_equal "end ", @c.crack_bundle.result
   end
 
@@ -50,6 +51,8 @@ class CrackTest < Minitest::Test
   end
 
   def test_it_finds_minimum_location_keys
+    @c.remove_offsets
+    @c.find_minimum_location_keys
     assert_equal [2, 0, 17, 15], @c.shifter.shifts
   end
 
@@ -64,8 +67,87 @@ class CrackTest < Minitest::Test
     assert_equal '9', @c.right_char(89)
   end
 
-  def test_it_finds_matching_key_set
-    skip
+  def matcher_setup
+    @keys = [2, 0, 17, 15]
+    @data = {keys: @keys, index: 0}
+  end
+
+  def test_it_indexes_left_and_right
+    matcher_setup
+    expected = @c.index_right(@data)[:index]
+    assert_equal 1, expected
+    expected = @c.index_left(@data)[:index]
+    assert_equal 0, expected
+  end
+
+  def test_it_increments_next_and_current
+    matcher_setup
+    e = @c.increment_next(@data)[:keys][1]
+    assert_equal 27, e
+    e = @c.increment_current(@data)[:keys][0]
+    assert_equal 29, e
+  end
+
+  def test_it_resets_next_and_current
+    matcher_setup
+    @data[:keys] = [2, 0, 98, 69]
+    @data[:index] = 2
+    e = @c.reset_next(@data)[:keys][3]
+    assert_equal 15, e
+    e = @c.reset_current(@data)[:keys][2]
+    assert_equal 17, e
+  end
+
+  def test_it_steps_back
+    matcher_setup
+    @data[:keys] = [11, 17, 78, 94]
+    @data[:index] = 2
+    data = @c.step_back(@data)
+    assert_equal [38, 17, 24, 13], data[:keys]
+    assert_equal 0, data[:index]
+
+    @data[:keys] = [11, 90, 78, 94]
+    @data[:index] = 2
+    data = @c.step_back(@data)
+    assert_equal [38, 9, 24, 13], data[:keys]
+    assert_equal 0, data[:index]
+
+    @data[:keys] = [88, 90, 78, 94]
+    @data[:index] = 2
+    data = @c.step_back(@data)
+    assert_nil data
+  end
+
+  def test_it_creates_next_setup
+    data = {keys: [2, 27, 71, 15], index: 1}
+    actual = @c.next_setup(data, true)
+    expected = {keys: [2, 27, 71, 15], index: 2}
+    assert_equal actual, expected
+
+    data = {keys: [92, 26, 15, 11], index: 1}
+    actual = @c.next_setup(data, false)
+    expected = {keys: [92, 26, 42, 11], index: 1}
+    assert_equal actual, expected
+
+    data = {keys: [65, 53, 96, 11], index: 1}
+    actual = @c.next_setup(data, false)
+    expected = {keys: [92, 26, 15, 11], index: 0}
+    assert_equal actual, expected
+
+    data = {keys: [38, 80, 96, 11], index: 1}
+    actual = @c.next_setup(data, false)
+    expected = {keys: [65, 26, 15, 11], index: 0}
+    assert_equal actual, expected
+  end
+
+  def test_it_finds_matching_keyset
+    actual = @c.match([11, 26, 15, 11])
+    assert_equal [92, 26, 69, 92], actual
+  end
+
+  def test_it_returns_nil_for_no_match
+    actual = @c.match([11, 22, 12, 12])
+    assert_nil actual
   end
 
 end
