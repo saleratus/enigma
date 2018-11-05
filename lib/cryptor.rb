@@ -14,7 +14,7 @@ class Cryptor
 
   def crypt
     @m.result = ''
-    @m.message.downcase.each_char.with_index do |char, i|
+    @m.origin.downcase.each_char.with_index do |char, i|
       position = (i % 4)
       @m.result << @shifter.char_shift(char, position, @direction)
     end

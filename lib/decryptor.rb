@@ -7,5 +7,5 @@ class Decryptor < Cryptor
     super(message_bundle)
     crypt
   end
-
+  
 end

@@ -10,7 +10,7 @@ class CrackTest < Minitest::Test
     @enigma = Enigma.new
     @encrypted = @enigma.encrypt("hello world end", "02715", "040895")
     @m = MessageBundle.new(@encrypted[:encryption], '00000', "040895")
-    @c = Crack.new(@m)
+    @c = Crack.new(@m, true)
   end
 
   def test_it_exists
@@ -26,17 +26,17 @@ class CrackTest < Minitest::Test
     assert_equal '00000', @c.shifter.key
   end
 
-  def test_it_creates_crack_bundle
-    crack_bundle = @c.create_crack_bundle
-    assert_instance_of MessageBundle, crack_bundle
-    assert_equal "hnwt", crack_bundle.message
-    assert_equal "end ", crack_bundle.result
+  def test_it_creates_bundle
+    bundle = @c.create_bundle_with_4_known_characters
+    assert_instance_of MessageBundle, bundle
+    assert_equal "hnwt", bundle.origin
+    assert_equal "end ", bundle.result
   end
 
-  def test_it_removes_crack_bundle_offsets
+  def test_it_removes_bundle_offsets
     @c.remove_offsets
-    assert_equal "gnuo", @c.crack_bundle.message
-    assert_equal "end ", @c.crack_bundle.result
+    assert_equal "gnuo", @c.bundle.origin
+    assert_equal "end ", @c.bundle.result
   end
 
   def test_it_finds_character_rotation_distance
@@ -148,6 +148,22 @@ class CrackTest < Minitest::Test
   def test_it_returns_nil_for_no_match
     actual = @c.match([11, 22, 12, 12])
     assert_nil actual
+  end
+
+  def test_it_puts_position_keys_in_bundle_key
+    keys = [92, 26, 69, 92]
+    @c.position_keys_to_bundle_key(keys)
+    assert_equal "92692", @m.key
+  end
+
+  def test_it_runs_using_class_method
+    Crack.run(@m)
+    assert_equal "02715", @m.key
+  end
+
+  def test_it_places_decryted_message_in_bundle
+    Crack.run(@m)
+    assert_equal "hello world end", @m.result
   end
 
 end
