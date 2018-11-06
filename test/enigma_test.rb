@@ -9,15 +9,10 @@ class EnigmaTest < Minitest::Test
     @message = "hello world! end"
     @key = "02715"
     @date = "040895"
-    @e.encrypt(@message, @key, @date)
   end
 
   def test_it_exists
     assert_instance_of Enigma, @e
-  end
-
-  def test_it_creates_message_bundle
-    assert_instance_of MessageBundle, @e.m
   end
 
   def test_it_encrypts_message_with_key_and_date
@@ -50,9 +45,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_cracks_message_with_date
-  skip
-    encrypted = @e.encrypt("hello world", "02715", "040895")
-    @e.crack(encrypted, "040895")
+    encrypted = @e.encrypt("hello world end", "02715", "040895")
+    cracked = @e.crack(encrypted[:encryption], "040895")
   end
 
 end

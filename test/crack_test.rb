@@ -152,7 +152,7 @@ class CrackTest < Minitest::Test
 
   def test_it_puts_position_keys_in_bundle_key
     keys = [92, 26, 69, 92]
-    @c.position_keys_to_bundle_key(keys)
+    @c.keys_to_message_key(keys)
     assert_equal "92692", @m.key
   end
 
@@ -163,7 +163,6 @@ class CrackTest < Minitest::Test
 
   def test_it_places_decryted_message_in_bundle
     Crack.run(@m)
-    binding.pry
     assert_equal "hello world end", @m.result
   end
 
