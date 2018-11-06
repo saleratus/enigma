@@ -5,7 +5,9 @@ module Matcher
     data = {keys: keys, index: 0}
     loop do
       return nil if data == nil
-      keys = data[:keys]; i = data[:index]
+      keys = data[:keys]
+      i = data[:index]
+      #puts "#{data[:index]}, #{data[:keys]}"
       forward_match = right_char(keys[i]) == left_char(keys[i + 1])
       return keys if (forward_match && i == 2) # SUCCESS
       data = next_setup(data, forward_match)
