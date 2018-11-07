@@ -16,7 +16,7 @@ class MessageBundle
   end
 
   def todays_date_string
-    Date.new.strftime("%d%m%y")
+    Date.today.strftime("%d%m%y")
   end
 
 end
