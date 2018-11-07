@@ -1,20 +1,20 @@
 
 require_relative './test_helper'
-require_relative '../lib/crack'
+require_relative '../lib/crackor'
 require_relative '../lib/message_bundle'
 require_relative '../lib/enigma'
 
-class CrackTest < Minitest::Test
+class CrackorTest < Minitest::Test
 
   def setup
     @enigma = Enigma.new
     @encrypted = @enigma.encrypt("hello world end", "02715", "040895")
     @m = MessageBundle.new(@encrypted[:encryption], '00000', "040895")
-    @c = Crack.new(@m, true)
+    @c = Crackor.new(@m, true)
   end
 
   def test_it_exists
-    assert_instance_of Crack, @c
+    assert_instance_of Crackor, @c
   end
 
   def test_it_holds_instance_variables
@@ -157,12 +157,12 @@ class CrackTest < Minitest::Test
   end
 
   def test_it_runs_using_class_method
-    Crack.run(@m)
+    Crackor.run(@m)
     assert_equal "02715", @m.key
   end
 
   def test_it_places_decryted_message_in_bundle
-    Crack.run(@m)
+    Crackor.run(@m)
     assert_equal "hello world end", @m.result
   end
 
