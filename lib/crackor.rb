@@ -3,7 +3,7 @@ require './lib/shifter'
 require './lib/matcher'
 require './lib/decryptor'
 
-class Crack
+class Crackor
   attr_reader :m, :shifter, :bundle
 
   include Matcher

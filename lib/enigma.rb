@@ -1,7 +1,7 @@
 require_relative './message_bundle'
 require_relative './encryptor'
 require_relative './decryptor'
-require_relative './crack'
+require_relative './crackor'
 
 
 class Enigma
@@ -22,8 +22,8 @@ class Enigma
 
   def crack(message, date = nil)
     @m = MessageBundle.new(message, "00000", date)
-    Crack.run(@m)
-    {decryption: @m.result, key: @m.key, date: @m.date}
+    Crackor.run(@m)
+    {decryption: @m.result, date: @m.date, key: @m.key}
   end
 
 end
